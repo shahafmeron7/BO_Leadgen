@@ -1,0 +1,12 @@
+.questionPreview{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.questionTitle{
+    font-size: 16px;
+}
+.answerItem{
+    
+}

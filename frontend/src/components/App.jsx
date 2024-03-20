@@ -1,13 +1,13 @@
 import React from 'react';
-import Questionnaire from './Questionnaire/Questionnaire.jsx';
+import QuestionnaireCreate from './Questionnaire/QuestionnaireCreate';
 
-const App = () => {
+function App() {
   return (
     <div>
       <h1>Questionnaire Management System</h1>
-      <Questionnaire />
+      <QuestionnaireCreate />
     </div>
   );
-};
+}
 
 export default App;
