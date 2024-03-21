@@ -1,10 +1,10 @@
 import React, { createContext, useState } from "react";
-import { NavLink } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 
 import styles from "./Sidebar.module.css";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import {SidebarItem} from './SidebarItem'
-import { Boxes, LayoutDashboard, Settings } from 'lucide-react';
+import { SidebarItem } from "./SidebarItem";
+import { Boxes, LayoutDashboard, Settings } from "lucide-react";
 
 export const SideBarContext = createContext();
 
@@ -12,9 +12,24 @@ function Sidebar() {
   const [activeItem, setActiveItem] = useState("Questionnaires");
   const [expanded, setExpanded] = useState(true);
   const sidebarItems = [
-    { id: "New Questionnaire", icon: <LayoutDashboard size={20} />, text: "New Questionnaire", to: "/createquestionnaire" },
-    { id: "Questionnaires", icon: <Boxes size={20} />, text: "Questionnaires", to: "/questionnaires" },
-    { id: "Settings", icon: <Settings size={20} />, text: "Settings", to: "/settings" },
+    {
+      id: "New Questionnaire",
+      icon: <LayoutDashboard size={20} />,
+      text: "New Questionnaire",
+      to: "/createquestionnaire",
+    },
+    {
+      id: "Questionnaires",
+      icon: <Boxes size={20} />,
+      text: "Questionnaires",
+      to: "/questionnaires",
+    },
+    {
+      id: "Settings",
+      icon: <Settings size={20} />,
+      text: "Settings",
+      to: "/settings",
+    },
   ];
   return (
     <aside className={styles.aside}>
@@ -39,7 +54,15 @@ function Sidebar() {
         <SideBarContext.Provider value={{ expanded }}>
           <ul className={styles.navList}>
             {sidebarItems.map((item) => (
-              <NavLink key={item.id} to={item.to} className={({ isActive }) => isActive ? `${styles.navItem} ${styles.active}` : styles.navItem}>
+              <NavLink
+                key={item.id}
+                to={item.to}
+                style={{ textDecoration: 'none'}}
+                className={({ isActive }) =>
+                `${styles.listItem} ${isActive ? styles.active : ''}`
+
+                }
+              >
                 <SidebarItem
                   icon={item.icon}
                   text={item.text}
@@ -49,7 +72,7 @@ function Sidebar() {
             ))}
           </ul>
         </SideBarContext.Provider>
-          {/* <ul className={styles.navList}>{children}</ul> */}
+        {/* <ul className={styles.navList}>{children}</ul> */}
         {/* footer */}
         <div className={styles.navFooter}>
           <img

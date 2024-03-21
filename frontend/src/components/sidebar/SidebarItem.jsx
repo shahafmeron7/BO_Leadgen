@@ -2,13 +2,13 @@ import React, { useContext } from 'react'
 import styles from './SidebarItem.module.css'
 import { SideBarContext } from './Sidebar';
 
-export const SidebarItem = ({icon, text, active, onClick, alert}) => {
+export const SidebarItem = ({icon, text}) => {
   const {expanded} = useContext(SideBarContext);
 
   return (
+    
     <li
-      className={`${styles.listItem} ${active ? styles.active : ''}`}
-      onClick={onClick}
+      className={styles.listItem}
     >
       {icon}
       <span className={`${styles.listItemText} ${expanded ? styles.expanded : styles.notExpanded}`}>{text}</span>
