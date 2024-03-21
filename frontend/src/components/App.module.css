@@ -1,0 +1,9 @@
+.main{
+    display: flex;
+}
+.sidebar{
+    /* width:30vw; */
+}
+.form{
+    display: flex;
+}
