@@ -1,10 +1,11 @@
 import React from 'react';
-import QuestionnaireForm from '../Questionnaire/QuestionnareForm';
+// import QuestionnaireForm from '../Questionnaire/QuestionnareForm';
+import QuestionnaireMultiForm from '../Questionnaire/QuestionnaireMultiForm'
 
 function CreateQuestionnairePage() {
   return (
 
-      <QuestionnaireForm />
+      <QuestionnaireMultiForm />
 
   );
 }

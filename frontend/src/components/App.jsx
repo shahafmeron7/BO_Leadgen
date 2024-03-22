@@ -11,7 +11,7 @@ function App() {
   return (
       <main className={styles.main}>
         <SideNavbar className={styles.sidebar} />
-        <div className={styles.form}>
+        <div className={styles.content}>
           <Routes>
           <Route
               path="/"
