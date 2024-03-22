@@ -3,12 +3,15 @@ import React from 'react'
 const FormProgress = ({currentStep}) => {
   const steps = [1,2,3]
 return (
-    <div>
+    <div className={styles.stepsContainer}>
+            <div className={styles.stepsWrapper}>
+              
             {steps.map(step=>(
-                <div key={step} className={`${styles.stepContainer} ${step<=currentStep ? styles.stepActive: '' }`}>
+              <div key={step} className={`${styles.step} ${step<=currentStep ? styles.stepActive: '' }`}>
                     {step}
                 </div>
             ))}
+            </div>
     </div>
   )
 }
