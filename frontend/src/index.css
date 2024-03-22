@@ -1,7 +1,12 @@
 :root {
-  --blue-color: rgb(0, 111, 255);
-  --gray-color:rgba(153, 165, 197, 0.25);
+  --blue-color: rgb(0, 110, 255);
+  --blue-hover-color: rgb(0, 86, 199);
+  --prev-btn-bg-color:rgb(246, 246, 246);
+  --gray-color:rgba(153, 165, 197, 0.426);
   --blue-light-color:rgba(0, 111, 255, 0.1);
+  --border-btn-color:rgba(153, 165, 197, 0.5);
+  --border-input-color:rgba(153, 165, 197, 0.5);
+  --border-input-outline-color:rgba(0, 110, 255, 0);
 }
 
 body {

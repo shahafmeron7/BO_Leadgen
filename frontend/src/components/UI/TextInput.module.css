@@ -1,0 +1,22 @@
+.textInput{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    outline: var(--border-input-outline-color) solid 2px;
+    background-color: #fff;
+    transition: outline 150ms ease-in-out 0s;
+    cursor: text;
+    font-size:1rem;
+    border: 1px solid var(--border-input-color);
+    height: 3.5rem;
+    border-radius: 0.5rem;
+    width:25rem;
+    padding-left: 1.25rem;
+}
+.textInput::before{
+    position: absolute;
+    content:"Name";
+    font-size:1rem;
+    width: 10px;
+    height: 10px;
+}
