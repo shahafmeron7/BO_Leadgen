@@ -1,32 +1,39 @@
 import React from "react";
-import TextInput from "../UI/TextInput"; // Adjust the import path as needed
+import TextInput from "../UI/TextInput"; // Ensure the path is correct
 
-function QuestionDetails({
-  className,
-  currentQuestionText,
-  setCurrentQuestionText,
-  questionIdentifier,
-  setQuestionIdentifier,
-  questionType,
-  setQuestionType,
-}) {
+function QuestionDetails({ question, setQuestion }) {
+  const handleTextChange = (e) => {
+    const value = e.target.value;
+    setQuestion(prevQuestion => ({ ...prevQuestion, text: value }));
+  };
+
+  const handleIdentifierChange = (e) => {
+    const value = e.target.value;
+    setQuestion(prevQuestion => ({ ...prevQuestion, identifier: value }));
+  };
+
+  const handleQuestionTypeChange = (e) => {
+    const value = e.target.value;
+    setQuestion(prevQuestion => ({ ...prevQuestion, type: value }));
+  };
   return (
-    <div className={className}>
+    <div>
       <TextInput
-        value={currentQuestionText}
-        onChange={(e) => setCurrentQuestionText(e.target.value)}
+        value={question.text}
+        onChange={handleTextChange}
         placeholder="Current Question Text"
       />
       <TextInput
-        value={questionIdentifier}
-        onChange={(e) => setQuestionIdentifier(e.target.value)}
+        value={question.identifier}
+        onChange={handleIdentifierChange}
         placeholder="Question Identifier"
       />
       <TextInput
-        value={questionType}
-        onChange={(e) => setQuestionType(e.target.value)}
+        value={question.type}
+        onChange={handleQuestionTypeChange}
         placeholder="Question Type Structure"
       />
+      {/* Implement TextInput for answers if needed */}
     </div>
   );
 }

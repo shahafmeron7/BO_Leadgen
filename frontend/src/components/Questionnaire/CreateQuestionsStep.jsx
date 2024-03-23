@@ -1,9 +1,26 @@
-import React from 'react'
+// CreateQuestionsStep.jsx
 
-const CreateQuestionsStep = () => {
+import React, { useState, useEffect } from "react";
+import { useForm } from "../Context/FormContext";
+import QuestionDetails from "./QuestionDetails";
+
+const CreateQuestionsStep = ({}) => {
+  const { currentQuestion, setCurrentQuestion, addQuestionToFormData } = useForm();
+
+  const handleAddQuestion = () => {
+    addQuestionToFormData();
+  };
+
   return (
-    <div>CreateQuestionsStep</div>
-  )
-}
+    <div>
+      <QuestionDetails
+        question={currentQuestion}
+        setQuestion={setCurrentQuestion}
+      />
 
-export default CreateQuestionsStep
+      <button onClick={handleAddQuestion}>Add Question</button>
+    </div>
+  );
+};
+
+export default CreateQuestionsStep;
