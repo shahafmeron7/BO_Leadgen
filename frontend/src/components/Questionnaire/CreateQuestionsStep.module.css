@@ -1,0 +1,15 @@
+.questionContainer{
+    display: flex;
+    flex-direction: column;
+    gap:0.5rem;
+}
+.answersList{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.3125rem;
+}
+.answerItem{
+    display: flex;
+    gap:0.3125rem;
+}

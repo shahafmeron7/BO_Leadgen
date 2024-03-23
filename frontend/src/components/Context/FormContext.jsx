@@ -16,78 +16,151 @@ export const FormProvider = ({ children }) => {
     type: "",
     answers: [],
   });
+  const [currentAnswers, setCurrentAnswers] = useState([""]);
+  const [errors, setErrors] = useState({});
 
   const handleQuestionnaireNameChange = (e) => {
     setFormData({ ...formData, questionnaireName: e.target.value });
+    setErrors({ ...errors, questionnaireName: "" });
   };
 
   const handlePortalNameChange = (e) => {
     setFormData({ ...formData, portalName: e.target.value });
+    setErrors({ ...errors, portalName: "" });
   };
 
   const addQuestionToFormData = () => {
-    setFormData(prevState => ({
+    setFormData((prevState) => ({
       ...prevState,
       questions: [...prevState.questions, currentQuestion],
     }));
     setCurrentQuestion({ text: "", identifier: "", type: "", answers: [] }); // Clear current question after adding
+    setCurrentAnswers([""]);
   };
-
 
   const clearCurrentQuestion = () => {
     return { text: "", identifier: "", type: "", answers: [] };
   };
+  const addAnswerField = () => {
+    console.log('add aswer')
+    setCurrentAnswers([...currentAnswers, ""]);
+  };
+  const removeAnswerField = (index) => {
+    if (currentAnswers.length > 1) {
+      const updatedAnswers = currentAnswers.filter((_, i) => i !== index);
+      setCurrentAnswers(updatedAnswers);
+      
+      // Optionally clear the error when the action doesn't result in an error state
+      setErrors(prevErrors => ({ ...prevErrors, answers: '' }));
+    } else {
+      console.log('error here',)
+      // Set an error message when trying to remove the last answer
+      setErrors(prevErrors => ({ ...prevErrors, answers:{general: 'Minimum one answer required.'} }));
+    }
+};
+  // Updates the text for a specific answer of the current question
+  const updateAnswerText = (text, index) => {
+    const updatedAnswers = currentAnswers.map((answer, i) =>
+      i === index ? text : answer
+    );
+    setCurrentAnswers(updatedAnswers);
+    // Also update the errors state to remove the error for this answer index
+    if (errors.answers && errors.answers[index]) {
+      const updatedErrors = { ...errors }; // Make a shallow copy of the errors object
+      delete updatedErrors.answers[index]; // Remove the error for the updated answer
 
+      // Check if after removing the error, the answers errors object is empty
+      if (Object.keys(updatedErrors.answers).length === 0) {
+          delete updatedErrors.answers; // Remove the answers key if no more answer errors
+      }
+      console.log(updatedErrors)
+      setErrors(updatedErrors); // Update the errors state
+  }
+  };
   // Validation for Step 1
   const validateStepOne = () => {
-    return (
-      formData.questionnaireName.trim() !== "" &&
-      formData.portalName.trim() !== ""
-    );
+    let errors = {};
+    if (!formData.questionnaireName.trim()) {
+      errors.questionnaireName = "Questionnaire name is required.";
+    }
+    if (!formData.portalName.trim()) {
+      errors.portalName = "Portal name is required.";
+    }
+    return errors;
   };
 
   // Validation for Step 2
   const validateStepTwo = () => {
-    return (
-      formData.questions.length > 0 &&
-      formData.questions.every(
-        (question) =>
-          question.text.trim() !== "" &&
-          question.answers.every((answer) => answer.trim() !== "")
-      )
-    );
+    let errors = {};
+
+    if (!currentQuestion.text.trim()) {
+      errors.text = "Question text is required.";
+    }
+
+    if (!currentQuestion.identifier.trim()) {
+      errors.identifier = "Identifier is required.";
+    }
+
+    if (!currentQuestion.type.trim()) {
+      errors.type = "Question type is required.";
+    }
+    // Initialize the errors.answers as an object or array to store individual answer errors
+    errors.answers = {};
+
+    currentQuestion.answers.forEach((answer, index) => {
+      if (!answer.trim()) {
+        // Record an error for each answer that fails validation
+        errors.answers[index] = "Answer is required.";
+      }
+    });
+    console.log(currentQuestion,"currentquestion")
+    // Check if there are any answers at all
+    if (currentQuestion.answers.length === 0) {
+      errors.answers.general = "At least one valid answer is required.";
+    } else if (Object.keys(errors.answers).length === 0) {
+      delete errors.answers; // If there are no answer errors, remove the answers key
+    }
+    return errors;
   };
-  // Memoize the context value to prevent unnecessary re-renders
 
   const validateCurrentStep = (step) => {
+    let stepErrors = {};
     switch (step) {
       case 1:
-        return validateStepOne();
+        stepErrors = validateStepOne();
+        break;
       case 2:
-        return validateStepTwo();
-      case 3:
-        // Assuming step 3 is always valid as it's a review step, or add your validation
-        return true;
-      default:
-        return false;
+        stepErrors = validateStepTwo();
+        break;
+      // Include other cases as needed
     }
+    console.log(stepErrors, step);
+    setErrors(stepErrors);
+    return Object.keys(stepErrors).length === 0; // Return true if no errors
   };
-  const contextValue = useMemo(() => ({
-    formData,
-    currentQuestion,
-    setCurrentQuestion,
-    setFormData,
-    handleQuestionnaireNameChange,
-    handlePortalNameChange,
-    addQuestionToFormData,
-    clearCurrentQuestion,
-    validateCurrentStep
-  }), [formData,currentQuestion]);
+
+  // Memoize the context value to prevent unnecessary re-renders
+  const contextValue = useMemo(
+    () => ({
+      errors,
+      formData,
+      currentQuestion,
+      currentAnswers,
+      setCurrentAnswers,
+      addAnswerField,
+      removeAnswerField,
+      updateAnswerText,
+      setCurrentQuestion,
+      setFormData,
+      handleQuestionnaireNameChange,
+      handlePortalNameChange,
+      addQuestionToFormData,
+      clearCurrentQuestion,
+      validateCurrentStep,
+    }),
+    [formData, currentQuestion, currentAnswers, errors]
+  );
   return (
-    <FormContext.Provider
-      value={contextValue}
-    >
-      {children}
-    </FormContext.Provider>
+    <FormContext.Provider value={contextValue}>{children}</FormContext.Provider>
   );
 };

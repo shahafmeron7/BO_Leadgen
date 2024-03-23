@@ -11,12 +11,12 @@ const QuestionnaireMultiForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const { formData,validateCurrentStep } = useForm(); // Using useForm to access formData and setFormData
 
-  const [isCurrentStepValid, setIsCurrentStepValid] = useState(false);
+  // const [isCurrentStepValid, setIsCurrentStepValid] = useState(false);
 
-  useEffect(() => {
-    setIsCurrentStepValid(validateCurrentStep(currentStep, formData));
+  //  useEffect(() => {
+  //    setIsCurrentStepValid(validateCurrentStep(currentStep));
 
-  }, [formData, currentStep]);
+  // }, [formData, currentStep]);
 
   function nextStep() {
     setCurrentStep(currentStep + 1);
@@ -26,7 +26,7 @@ const QuestionnaireMultiForm = () => {
     if (currentStep > 1) setCurrentStep(currentStep - 1);
   }
   const handleNextClick = () => {
-    const isValid = validateCurrentStep(currentStep, formData);
+    const isValid = validateCurrentStep(currentStep);
     if (isValid) {
       nextStep();
     } else {
@@ -67,19 +67,21 @@ const QuestionnaireMultiForm = () => {
         )}
         {currentStep < 3 ? (
           <button
-            className={`${styles.nextBtn} ${
-              !isCurrentStepValid ? styles.disabledBtn : ""
-            }`}
+            // className={`${styles.nextBtn} ${
+            //   !isCurrentStepValid ? styles.disabledBtn : ""
+            // }`}
+            className={styles.nextBtn}
             onClick={handleNextClick}
-            disabled={!isCurrentStepValid}
+            // disabled={!isCurrentStepValid}
           >
             Next <ArrowRight size={20} />
           </button>
         ) : (
           <button
-            className={`${styles.nextBtn} ${
-              !isCurrentStepValid ? styles.disabledBtn : ""
-            }`}
+            className={styles.nextBtn}
+            // className={`${styles.nextBtn} ${
+            //   !isCurrentStepValid ? styles.disabledBtn : ""
+            // }`}
             onClick={handleSubmit}
           >
             Submit

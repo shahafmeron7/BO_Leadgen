@@ -3,7 +3,7 @@ import TextInput from "../UI/TextInput";
 import styles from "./QuestionnaireMultiForm.module.css";
 import { useForm } from "../Context/FormContext";
 const QuestionnaireDetailsStep = () => {
-  const { formData, handleQuestionnaireNameChange, handlePortalNameChange } =
+  const { formData, handleQuestionnaireNameChange, handlePortalNameChange,errors } =
     useForm();
 
   return (
@@ -15,6 +15,9 @@ const QuestionnaireDetailsStep = () => {
           onChange={handleQuestionnaireNameChange}
           placeholder="Questionnaire Name"
         />
+        {errors.questionnaireName && (
+        <div className={styles.errMsg}>{errors.questionnaireName}</div>
+      )}
       </div>
       <div className={styles.inputItem}>
         <h4>Questionnaire Portal</h4>
@@ -23,6 +26,9 @@ const QuestionnaireDetailsStep = () => {
           onChange={handlePortalNameChange}
           placeholder="Portal Name"
         />
+         {errors.portalName && (
+        <div className={styles.errMsg}>{errors.portalName}</div>
+      )}
       </div>
     </div>
   );
