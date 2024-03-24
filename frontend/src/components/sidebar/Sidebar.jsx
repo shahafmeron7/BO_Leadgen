@@ -12,7 +12,7 @@ function Sidebar() {
       id: "New Questionnaire",
       icon: <LayoutDashboard size={20} />,
       text: "New Questionnaire",
-      to: "/createquestionnaire",
+      to: "/create-new",
     },
     {
       id: "Questionnaires",

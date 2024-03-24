@@ -6,6 +6,23 @@
 
   flex: 1;
 }
+.formTopContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    justify-content: center;
+    align-items: center;
+}
+.formContent{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    padding:1.5rem 1.75rem 1.5rem 1.75rem;
+    box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+    border-radius: 0.5rem;
+
+}
 .stepsContainer {
   display: flex;
 }
@@ -57,7 +74,7 @@ color: var(--blue-color)
     background-color: var(--prev-btn-bg-color);
     border: 1px solid var(--border-btn-color);
 }
-.nextBtn{
+.btn{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -72,7 +89,7 @@ color: var(--blue-color)
     background-color: var(--blue-color);
     transition: 150ms background-color ease-in;
 }
-.nextBtn:not(.disabledBtn):hover {
+.btn:not(.disabledBtn):hover {
     background-color: var(--blue-hover-color);
 }
 
@@ -86,7 +103,7 @@ color: var(--blue-color)
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 10px;
+    gap: 2rem;
 }
 
 .inputItem{
@@ -95,6 +112,9 @@ color: var(--blue-color)
     flex-direction: column;
     gap:0.75rem;
     justify-content: center;
+}
+.inputItem h4{
+    font-size: 1rem;
 }
 .errMsg{
     color:var(--err-msg-color);

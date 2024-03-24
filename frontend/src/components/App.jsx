@@ -18,7 +18,7 @@ function App() {
               element={<HomePage />}
             />
             <Route
-              path="/createquestionnaire"
+              path="/create-new"
               element={<CreateQuestionnairePage />}
             />
             <Route path="/questionnaires" element={<QuestionnairePage />} />

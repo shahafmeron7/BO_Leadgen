@@ -1,6 +1,6 @@
 // CreateQuestionsStep.jsx
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useForm } from "../Context/FormContext";
 import QuestionDetails from "./QuestionDetails";
 import AnswerList from "./AnswerList";
@@ -20,10 +20,17 @@ const CreateQuestionsStep = ({}) => {
         question={currentQuestion}
         setQuestion={setCurrentQuestion}
       />
+      <div className={styles.answersContainer}>
+        <label>Add Answers</label>
       <AnswerList />
+
+      </div>
       
 
       <button onClick={handleAddQuestion}>Add Question</button>
+      {errors.general && (
+        <div className={mainStyle.errMsg}>{errors.general}</div>
+      )}
     </div>
   );
 };

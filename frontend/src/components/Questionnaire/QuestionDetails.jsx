@@ -20,11 +20,12 @@ function QuestionDetails({ question, setQuestion }) {
   };
   return (
     <>
+    
     <div>
       <TextInput
         value={question.text}
         onChange={handleTextChange}
-        placeholder="Current Question Text"
+        placeholder="e.g Which best describes your business?"
       />
          {errors.text && (
         <div className={styles.errMsg}>{errors.text}</div>
@@ -34,7 +35,7 @@ function QuestionDetails({ question, setQuestion }) {
       <TextInput
         value={question.identifier}
         onChange={handleIdentifierChange}
-        placeholder="Question Identifier"
+        placeholder="e.g industry_type"
       />
          {errors.identifier && (
         <div className={styles.errMsg}>{errors.identifier}</div>
@@ -42,7 +43,7 @@ function QuestionDetails({ question, setQuestion }) {
       <TextInput
         value={question.type}
         onChange={handleQuestionTypeChange}
-        placeholder="Question Type Structure"
+        placeholder="e.g checkbox"
       />
          {errors.type && (
         <div className={styles.errMsg}>{errors.type}</div>

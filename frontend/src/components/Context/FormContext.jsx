@@ -19,6 +19,16 @@ export const FormProvider = ({ children }) => {
   const [currentAnswers, setCurrentAnswers] = useState([""]);
   const [errors, setErrors] = useState({});
 
+  const resetFormData = () => {
+    setFormData({
+      questionnaireName: "",
+      portalName: "",
+      questions: [],
+    });
+    setCurrentQuestion({ text: "", identifier: "", type: "", answers: [] });
+    setCurrentAnswers([""]);
+  };
+
   const handleQuestionnaireNameChange = (e) => {
     setFormData({ ...formData, questionnaireName: e.target.value });
     setErrors({ ...errors, questionnaireName: "" });
@@ -28,36 +38,65 @@ export const FormProvider = ({ children }) => {
     setFormData({ ...formData, portalName: e.target.value });
     setErrors({ ...errors, portalName: "" });
   };
-
   const addQuestionToFormData = () => {
-    setFormData((prevState) => ({
-      ...prevState,
-      questions: [...prevState.questions, currentQuestion],
-    }));
-    setCurrentQuestion({ text: "", identifier: "", type: "", answers: [] }); // Clear current question after adding
-    setCurrentAnswers([""]);
+    // First, validate the new question
+    const newErrors = validateNewQuestion();
+    setErrors(newErrors); // Update error state
+
+    // Only proceed if there are no errors
+    if (Object.keys(newErrors).length === 0) {
+      const updatedCurrentQuestion = {
+        ...currentQuestion,
+        answers: currentAnswers,
+      };
+
+      // Add this updated question to the list of questions in formData
+      setFormData((prevState) => ({
+        ...prevState,
+        questions: [...prevState.questions, updatedCurrentQuestion],
+      }));
+
+      // Reset currentQuestion and currentAnswers for the next input
+      setCurrentQuestion({ text: "", identifier: "", type: "", answers: [] });
+      setCurrentAnswers([""]);
+    }
   };
 
   const clearCurrentQuestion = () => {
     return { text: "", identifier: "", type: "", answers: [] };
   };
   const addAnswerField = () => {
-    console.log('add aswer')
+    console.log("add aswer");
+
     setCurrentAnswers([...currentAnswers, ""]);
+    if (errors.answers && errors.answers.general) {
+      const updatedErrors = { ...errors, answers: { ...errors.answers } };
+      delete updatedErrors.answers.general; // Remove the general error
+
+      // Check if after removing the general error, the answers errors object is empty
+      if (Object.keys(updatedErrors.answers).length === 0) {
+        delete updatedErrors.answers; // Remove the answers key if no more answer errors
+      }
+
+      setErrors(updatedErrors); // Update the errors state to reflect the removal of the general error
+    }
   };
   const removeAnswerField = (index) => {
     if (currentAnswers.length > 1) {
       const updatedAnswers = currentAnswers.filter((_, i) => i !== index);
       setCurrentAnswers(updatedAnswers);
-      
+
       // Optionally clear the error when the action doesn't result in an error state
-      setErrors(prevErrors => ({ ...prevErrors, answers: '' }));
+      setErrors((prevErrors) => ({ ...prevErrors, answers: "" }));
     } else {
-      console.log('error here',)
+      console.log("error here");
       // Set an error message when trying to remove the last answer
-      setErrors(prevErrors => ({ ...prevErrors, answers:{general: 'Minimum one answer required.'} }));
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        answers: { general: "Minimum one answer required." },
+      }));
     }
-};
+  };
   // Updates the text for a specific answer of the current question
   const updateAnswerText = (text, index) => {
     const updatedAnswers = currentAnswers.map((answer, i) =>
@@ -71,11 +110,11 @@ export const FormProvider = ({ children }) => {
 
       // Check if after removing the error, the answers errors object is empty
       if (Object.keys(updatedErrors.answers).length === 0) {
-          delete updatedErrors.answers; // Remove the answers key if no more answer errors
+        delete updatedErrors.answers; // Remove the answers key if no more answer errors
       }
-      console.log(updatedErrors)
+      console.log(updatedErrors);
       setErrors(updatedErrors); // Update the errors state
-  }
+    }
   };
   // Validation for Step 1
   const validateStepOne = () => {
@@ -88,9 +127,7 @@ export const FormProvider = ({ children }) => {
     }
     return errors;
   };
-
-  // Validation for Step 2
-  const validateStepTwo = () => {
+  const validateNewQuestion = () => {
     let errors = {};
 
     if (!currentQuestion.text.trim()) {
@@ -107,20 +144,31 @@ export const FormProvider = ({ children }) => {
     // Initialize the errors.answers as an object or array to store individual answer errors
     errors.answers = {};
 
-    currentQuestion.answers.forEach((answer, index) => {
+    currentAnswers.forEach((answer, index) => {
       if (!answer.trim()) {
         // Record an error for each answer that fails validation
         errors.answers[index] = "Answer is required.";
       }
     });
-    console.log(currentQuestion,"currentquestion")
+    console.log(currentQuestion, "currentquestion");
     // Check if there are any answers at all
-    if (currentQuestion.answers.length === 0) {
+    if (currentAnswers.length === 0) {
       errors.answers.general = "At least one valid answer is required.";
     } else if (Object.keys(errors.answers).length === 0) {
       delete errors.answers; // If there are no answer errors, remove the answers key
     }
     return errors;
+  };
+  // Validation for Step 2
+  const validateStepTwo = () => {
+    let errors = {};
+
+    if (formData.questions.length === 0) {
+      // Set a general error if no questions have been added
+      errors.general = "At least one question must be added before proceeding.";
+    }
+    return errors;
+
   };
 
   const validateCurrentStep = (step) => {
@@ -146,6 +194,7 @@ export const FormProvider = ({ children }) => {
       formData,
       currentQuestion,
       currentAnswers,
+      resetFormData,
       setCurrentAnswers,
       addAnswerField,
       removeAnswerField,
