@@ -4,33 +4,46 @@ import React from "react";
 import { useForm } from "../Context/FormContext";
 import QuestionDetails from "./QuestionDetails";
 import AnswerList from "./AnswerList";
-import styles from "./CreateQuestionsStep.module.css";
-import mainStyle from "./QuestionnaireMultiForm.module.css";
+import NewQuestionsList from "./NewQuestionsList";
+import styles from "./QuestionnaireMultiForm.module.css";
 const CreateQuestionsStep = ({}) => {
-  const { currentQuestion, setCurrentQuestion, addQuestionToFormData, errors } =
-    useForm();
+  const {
+    currentQuestion,
+    setCurrentQuestion,
+    addQuestionToFormData,
+    errors,
+    deleteQuestion,
+  } = useForm();
 
   const handleAddQuestion = () => {
     addQuestionToFormData();
   };
+  const handleDeleteQuestion = (index) => {
+    deleteQuestion(index);
+  };
 
   return (
     <div className={styles.questionContainer}>
-      <QuestionDetails
-        question={currentQuestion}
-        setQuestion={setCurrentQuestion}
-      />
-      <div className={styles.answersContainer}>
-        <label>Add Answers</label>
-      <AnswerList />
+      <div className={styles.questionDetailsContainer}>
+        <div className={styles.sectionBox}>
+          <label className={styles.sectionLabel}>Question Details</label>
+          <QuestionDetails
+            question={currentQuestion}
+            setQuestion={setCurrentQuestion}
+          />
+        </div>
+        <div className={styles.sectionBox}>
+        <label className={styles.sectionLabel}>Add Answers</label>
+          <AnswerList />
+        </div>
 
+
+        <button onClick={handleAddQuestion}>Add Question</button>
+        {errors.general && (
+          <div className={styles.errMsg}>{errors.general}</div>
+        )}
       </div>
-      
-
-      <button onClick={handleAddQuestion}>Add Question</button>
-      {errors.general && (
-        <div className={mainStyle.errMsg}>{errors.general}</div>
-      )}
+      <NewQuestionsList onDelete={handleDeleteQuestion} />
     </div>
   );
 };

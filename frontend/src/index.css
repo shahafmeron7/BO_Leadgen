@@ -1,15 +1,25 @@
 :root {
   --blue-color: rgb(0, 110, 255);
+  --blue-sidebar-color:#006FFF;
+  --blue-sidebar-active-color:#0262df;
+  --blue-sidebar-hover:rgba(0, 111, 255, 0.07);
+  --blue-sidbar-active-bg-color:rgba(0, 111, 255, 0.20);
   --blue-hover-color: rgb(0, 86, 199);
   --prev-btn-bg-color:rgb(246, 246, 246);
   --gray-color:rgba(153, 165, 197, 0.426);
+  --gray-sidebar-color:#8D90AD;
   --blue-light-color:rgba(0, 111, 255, 0.1);
   --border-btn-color:rgba(153, 165, 197, 0.5);
   --border-input-color:rgba(153, 165, 197, 0.5);
   --border-input-outline-color:rgba(0, 110, 255, 0);
   --err-msg-color:rgb(246, 43, 84);
+  --trash-btn-border-color: #f7dde4;
+  --trash-btn-bg-color:#FEF4F5;
+ 
 }
-
+*{
+  box-sizing: border-box;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

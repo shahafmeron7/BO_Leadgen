@@ -1,10 +1,8 @@
 import React from "react";
 import TextInput from "../UI/TextInput";
-import Button from "../UI/Button";
 import { useForm } from "../Context/FormContext";
-import { Trash2 } from "lucide-react";
-import styles from "./CreateQuestionsStep.module.css";
-import mainStyle from "./QuestionnaireMultiForm.module.css";
+import { Trash2,Plus } from "lucide-react";
+import styles from "./QuestionnaireMultiForm.module.css";
 const AnswerList = () => {
   const {
     currentAnswers,
@@ -18,7 +16,7 @@ const AnswerList = () => {
     <>
       <div className={styles.answersList}>
         {currentAnswers.map((answer, index) => (
-          <div key={index}>
+          <div key={index} className={styles.fieldItem}>
             <div  className={styles.answerItem}>
               <TextInput
                 value={answer}
@@ -27,22 +25,25 @@ const AnswerList = () => {
               />
               {/* Display error for individual answer if exists */}
 
-              <Button type="button" onClick={() => removeAnswerField(index)}>
-                <Trash2 size={20} />
-              </Button>
+              <button className={styles.trashBtn} type="button" onClick={() => removeAnswerField(index)}>
+                <Trash2 size={18} color="#e16573" />
+              </button>
             </div>
             {errors.answers && errors.answers[index] && (
-              <div className={mainStyle.errMsg}>{errors.answers[index]}</div>
+              <div className={styles.errMsg}>{errors.answers[index]}</div>
             )}
           </div>
         ))}
       </div>
       {errors.answers?.general && (
-        <div className={mainStyle.errMsg}>{errors.answers.general}</div>
+        <div className={styles.errMsg}>{errors.answers.general}</div>
       )}
-      <Button type="button" onClick={addAnswerField}>
-        Add Answer
-      </Button>
+      <div className={styles.btnContainer}>
+      <button className={styles.addAnswerBtn} type="button" onClick={addAnswerField}>
+        <Plus size={20} color="rgb(0, 110, 255)" strokeWidth={1.75} />
+      </button>
+
+      </div>
     </>
   );
 };

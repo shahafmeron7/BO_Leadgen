@@ -10,7 +10,7 @@ function SidebarHeader({ expanded, setExpanded }) {
           className={`${styles.logo} ${
             expanded ? styles.logoExpanded : styles.notExpanded
           }`}
-          src="https://img.logoipsum.com/262.svg"
+          src="https://img.logoipsum.com/296.svg"
           alt="logo"
         />
         <button

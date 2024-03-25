@@ -6,9 +6,7 @@ import styles from '../App.module.css'
 function CreateQuestionnairePage() {
   return (
     <FormProvider>
-      <div className={styles.formContainer}>
       <QuestionnaireMultiForm />
-      </div>
     </FormProvider>
   );
 }

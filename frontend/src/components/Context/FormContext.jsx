@@ -61,7 +61,10 @@ export const FormProvider = ({ children }) => {
       setCurrentAnswers([""]);
     }
   };
-
+  const deleteQuestion = (index) => {
+    const updatedQuestions = formData.questions.filter((_, questionIndex) => questionIndex !== index);
+    setFormData({ ...formData, questions: updatedQuestions });
+  };
   const clearCurrentQuestion = () => {
     return { text: "", identifier: "", type: "", answers: [] };
   };
@@ -204,6 +207,7 @@ export const FormProvider = ({ children }) => {
       handleQuestionnaireNameChange,
       handlePortalNameChange,
       addQuestionToFormData,
+      deleteQuestion,
       clearCurrentQuestion,
       validateCurrentStep,
     }),

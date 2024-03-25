@@ -1,27 +1,25 @@
 .formContainer {
   display: flex;
-  justify-content: space-evenly;
   align-items: center;
   flex-direction: column;
-
-  flex: 1;
+  
 }
-.formTopContainer{
-    display: flex;
-    flex-direction: column;
-    gap: 5rem;
-    justify-content: center;
-    align-items: center;
+.formTopContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
 }
-.formContent{
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    align-items: center;
-    padding:1.5rem 1.75rem 1.5rem 1.75rem;
-    box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
-    border-radius: 0.5rem;
-
+.formContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  padding: 1.5rem 1.75rem 1.5rem 1.75rem;
+  box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em,
+    rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+  border-radius: 0.5rem;
 }
 .stepsContainer {
   display: flex;
@@ -33,89 +31,188 @@
   gap: 16px;
 }
 .step {
-    text-align: center;
+  text-align: center;
   height: 1.875rem;
   border-radius: 0.5rem;
   color: var(--gray-color);
   width: 6.5rem;
 }
-.step:after{
-    content: "";
-    border-radius: 0.375rem;
-    max-width: 6.5rem;
-    height: 0.625rem;
-    background: var(--gray-color);
-    display: block;
-    margin-top: 10px;
+.step:after {
+  content: "";
+  border-radius: 0.375rem;
+  max-width: 6.5rem;
+  height: 0.625rem;
+  background: var(--gray-color);
+  display: block;
+  margin-top: 10px;
 }
-.stepActive:after{
-    width: 100%;
-    height: 0.625rem;
-    display: block;
-    content: "";
-    border-radius: 0.375rem;
-    margin-top: 0.625rem;
-    background: var(--blue-color);
+.stepActive:after {
+  width: 100%;
+  height: 0.625rem;
+  display: block;
+  content: "";
+  border-radius: 0.375rem;
+  margin-top: 0.625rem;
+  background: var(--blue-color);
 }
 .stepActive {
-color: var(--blue-color)
+  color: var(--blue-color);
 }
-.buttonsContainer{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap:4px;
+.buttonsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
 }
-.prevBtn{
-    cursor: pointer;
-    border-radius: 0.5rem;
-    height:3.5rem;
-    width: 3.5rem;
-    background-color: var(--prev-btn-bg-color);
-    border: 1px solid var(--border-btn-color);
+.prevBtn {
+  cursor: pointer;
+  border-radius: 0.5rem;
+  height: 3.5rem;
+  width: 3.5rem;
+  background-color: var(--prev-btn-bg-color);
+  border: 1px solid var(--border-btn-color);
 }
-.btn{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap:0.375rem;
-    width:11.5rem;
-    height:3.5rem;
-    color: #fff;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    font-size: 1rem;
-    border:none;
-    background-color: var(--blue-color);
-    transition: 150ms background-color ease-in;
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  width: 11.5rem;
+  height: 3.5rem;
+  color: #fff;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  border: none;
+  background-color: var(--blue-color);
+  transition: 150ms background-color ease-in;
 }
 .btn:not(.disabledBtn):hover {
-    background-color: var(--blue-hover-color);
+  background-color: var(--blue-hover-color);
 }
-
-.disabledBtn{
-    opacity: 0.5;
-    cursor: not-allowed;
-    background-color: var(--gray-color); 
-}
-
-.detailsStep{
+.btnContainer{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 2rem;
-}
-
-.inputItem{
-    display: flex;
-    align-items: left;
-    flex-direction: column;
-    gap:0.75rem;
+    align-items: center;
     justify-content: center;
 }
-.inputItem h4{
+.addAnswerBtn{
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    padding: 0.75rem;
+    background-color: rgba(0, 111, 255, 0.07);
+}
+.disabledBtn {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: var(--gray-color);
+}
+
+.detailsStep {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.inputItem {
+  display: flex;
+  align-items: left;
+  flex-direction: column;
+  gap: 0.75rem;
+  justify-content: center;
+}
+.inputItem h4 {
+  font-size: 1rem;
+}
+.errMsg {
+  color: var(--err-msg-color);
+}
+.newQuestionsSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+.questionDetailsContainer{
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 4px;
+    padding: 2.5rem;
+    gap:2rem;
+    box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.07);
+}
+
+.sectionBox{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    border-radius: 0.125rem;
+}
+.sectionLabel{
     font-size: 1rem;
+    font-weight: 600;
 }
-.errMsg{
-    color:var(--err-msg-color);
+.questionsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.questionContainer{
+    display: flex;
+    flex-direction: column;
+    gap:0.5rem;
+}
+.answersList{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.3125rem;
+}
+.answerItem{
+    display: flex;
+    gap:0.3125rem;
+}
+.newQuestionItem {
+  display: flex;
+  cursor: pointer;
+  flex-direction: column;
+  width: 100%;
+  box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em,
+    rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+}
+.questionHeader {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem 1.75rem 1.5rem 1.75rem;
+}
+
+.questionItemDetails {
+  overflow: hidden;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: top;
+  height: 0; /* Initially not visible */
+  opacity: 0;
+  padding: 1.5rem 1.75rem 1.5rem 1.75rem;
+}
+
+.questionItemDetailsOpen {
+  height: auto; /* Adjust based on content */
+  opacity: 1;
+  transform: scaleY(1);
+}
+.trashBtn{
+
+    border: 1px solid var(--trash-btn-border-color);
+    background-color: var( --trash-btn-bg-color);
+    border-radius: 8px;
+    padding: 0.275rem 0.4rem 0.275rem 0.4rem;
 }

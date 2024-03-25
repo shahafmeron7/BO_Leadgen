@@ -110,61 +110,64 @@ const QuestionnaireMultiForm = () => {
   }
   return (
     <div className={styles.formContainer}>
-      {isSubmitting ? (
-        <TailSpin
-          visible={true}
-          height="100"
-          width="100"
-          color="#006EFF"
-          ariaLabel="tail-spin-loading"
-          radius="1"
-          wrapperStyle={{}}
-          wrapperClass=""
-        />
-      ) : formSubmitted ? (
-        <>
-          <h4>{submissionMessage}</h4>
-          <div className={styles.buttonsContainer}>
-            <NavLink to="/questionnaires" className="button">
-              Review Questionnaire
-            </NavLink>
-            <button
-              onClick={() => {
-                setFormSubmitted(false); // Reset the form submission state
-                setCurrentStep(1); // Reset to the first step
-                // Reset the form state to initial values here if needed
-                navigate("/create-new"); // Navigate to the form start page for a new questionnaire
-              }}
-            >
-              Create New Questionnaire
-            </button>
-          </div>
-        </>
-      ) : (
-        <>
-        <div className={styles.formTopContainer}>
-          <FormProgress currentStep={currentStep} />
-          <div className={styles.formContent}>{renderStep()}</div>
-
-        </div>
-          <div className={styles.buttonsContainer}>
-            {currentStep > 1 && (
-              <button className={styles.prevBtn} onClick={prevStep}>
-                <ChevronLeft size={20} />
+      <div className={styles.formWrapper}>
+        {isSubmitting ? (
+          <TailSpin
+            visible={true}
+            height="100"
+            width="100"
+            color="#006EFF"
+            ariaLabel="tail-spin-loading"
+            radius="1"
+            wrapperStyle={{}}
+            wrapperClass=""
+          />
+        ) : formSubmitted ? (
+          <>
+            <h4>{submissionMessage}</h4>
+            <div className={styles.buttonsContainer}>
+              <NavLink to="/questionnaires" className="button">
+                Review Questionnaire
+              </NavLink>
+              <button
+                onClick={() => {
+                  setFormSubmitted(false); // Reset the form submission state
+                  setCurrentStep(1); // Reset to the first step
+                  // Reset the form state to initial values here if needed
+                  navigate("/create-new"); // Navigate to the form start page for a new questionnaire
+                }}
+              >
+                Create New Questionnaire
               </button>
-            )}
-            {currentStep < 3 ? (
-              <button className={styles.btn} onClick={handleNextClick}>
-                Next <ArrowRight size={20} />
-              </button>
-            ) : (
-              <button className={styles.btn} onClick={handleSubmit}>
-                Submit
-              </button>
-            )}
-          </div>
-        </>
-      )}
+            </div>
+          </>
+        ) : (
+          <>
+            <div className={styles.formTopContainer}>
+              <FormProgress currentStep={currentStep} />
+              {/* <div className={styles.formContent}> */}
+              {renderStep()}
+              {/* </div> */}
+            </div>
+            <div className={styles.buttonsContainer}>
+              {currentStep > 1 && (
+                <button className={styles.prevBtn} onClick={prevStep}>
+                  <ChevronLeft size={20} />
+                </button>
+              )}
+              {currentStep < 3 ? (
+                <button className={styles.btn} onClick={handleNextClick}>
+                  Next <ArrowRight size={20} />
+                </button>
+              ) : (
+                <button className={styles.btn} onClick={handleSubmit}>
+                  Submit
+                </button>
+              )}
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 };
