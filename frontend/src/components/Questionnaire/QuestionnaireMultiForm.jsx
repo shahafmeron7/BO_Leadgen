@@ -109,7 +109,6 @@ const QuestionnaireMultiForm = () => {
     );
   }
   return (
-    <div className={styles.formContainer}>
       <div className={styles.formWrapper}>
         {isSubmitting ? (
           <TailSpin
@@ -168,7 +167,6 @@ const QuestionnaireMultiForm = () => {
           </>
         )}
       </div>
-    </div>
   );
 };
 //   return (
