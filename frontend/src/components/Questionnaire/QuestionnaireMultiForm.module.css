@@ -21,7 +21,60 @@
     rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
   border-radius: 0.5rem;
 }
-.stepsContainer {
+.stepsContainer{
+    display: flex;
+    justify-content: space-between;
+}
+.stepText{
+    color: var(--gray2-color);
+}
+.stepItem{
+ position: relative;
+ display: flex;
+ flex-direction: column;
+ justify-content: center; 
+ align-items: center;
+ width: 10rem;  
+ gap:0.5rem;
+}
+.stepItem:not(:first-child)::before{
+    content: '';
+    background-color: rgb(226 232 240);
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    right: 50%;
+    top: 1.25rem;
+    transform: translateY(50%);
+}
+.step{
+    height: 2.5rem;
+    width: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    background-color: rgb(51 65 85);
+    border-radius: 50%;
+    font-weight: 500;
+    color: #fff;
+    transition: all 500ms ease-in-out;
+}
+.active .step{
+    background-color: var(--blue-color);
+}
+.complete .step{
+    background-color: var(--green-bg-color);
+}
+.complete .stepText{
+    font-weight: 600;
+    color:var(--black-text-color);
+}
+.complete:not(:first-child)::before{
+    background-color: var(--green-bg-color);
+   
+}
+/* .stepsContainer {
   display: flex;
 }
 .stepsWrapper {
@@ -57,7 +110,7 @@
 }
 .stepActive {
   color: var(--blue-color);
-}
+} */
 .buttonsContainer {
   display: flex;
   justify-content: center;

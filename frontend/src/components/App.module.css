@@ -1,5 +1,7 @@
 .main{
     display: flex;
+    height: 100%;
+    background-color: rgb(251, 251, 251);
 }
 
 .content{
@@ -19,4 +21,10 @@
     flex-direction: column;
     max-width: 76rem;
     margin: auto;
+}
+@media screen and (min-width: 1440px) {
+    .pageChildContent{
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
 }

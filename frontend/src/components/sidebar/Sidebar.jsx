@@ -4,7 +4,7 @@ import { Boxes, LayoutDashboard, Settings } from "lucide-react";
 
 import SidebarChildren from "./SidebarChildren";
 import SidebarFooter from "./SidebarFooter";
-import SidebarHeader from './SidebarHeader'
+import SidebarHeader from "./SidebarHeader";
 function Sidebar() {
   const [expanded, setExpanded] = useState(true);
   const sidebarItems = [
@@ -29,18 +29,21 @@ function Sidebar() {
   ];
 
   return (
-    <aside className={styles.aside}>
-      <nav className={styles.nav}>
-        <SidebarHeader expanded={expanded} setExpanded={setExpanded} />
-        <SidebarChildren sidebarItems={sidebarItems} expanded={expanded} />
-        <SidebarFooter expanded={expanded} />
-      </nav>
-    </aside>
+    // <aside className={styles.aside}>
+    <nav className={styles.sidebar}>
+      <div className={styles.menuWrapper}>
+        <div className={styles.menuContent}>
+          <SidebarHeader expanded={expanded} setExpanded={setExpanded} />
+          <SidebarChildren sidebarItems={sidebarItems} expanded={expanded} />
+          <SidebarFooter expanded={expanded} />
+        </div>
+      </div>
+    </nav>
+    // </aside>
   );
 }
 
 export default Sidebar;
-
 
 // import React, { createContext, useState } from "react";
 // import { NavLink } from "react-router-dom";
@@ -48,7 +51,6 @@ export default Sidebar;
 // import styles from "./Sidebar.module.css";
 // import { ChevronLeft, ChevronRight } from "lucide-react";
 // import { Boxes, LayoutDashboard, Settings } from "lucide-react";
-
 
 // function Sidebar() {
 //   const [expanded, setExpanded] = useState(true);
