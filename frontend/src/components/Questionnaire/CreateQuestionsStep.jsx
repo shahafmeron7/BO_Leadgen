@@ -23,28 +23,49 @@ const CreateQuestionsStep = ({}) => {
   };
 
   return (
-    <div className={styles.questionContainer}>
-      <div className={styles.questionDetailsContainer}>
-        <div className={styles.sectionBox}>
-          <label className={styles.sectionLabel}>Question Details</label>
-          <QuestionDetails
-            question={currentQuestion}
-            setQuestion={setCurrentQuestion}
-          />
-        </div>
-        <div className={styles.sectionBox}>
-        <label className={styles.sectionLabel}>Add Answers</label>
-          <AnswerList />
-        </div>
+    <>
+    <div className={styles.createQuestionContainer}>
 
-
-        <button onClick={handleAddQuestion}>Add Question</button>
-        {errors.general && (
-          <div className={styles.errMsg}>{errors.general}</div>
-        )}
+      <div className={styles.createQuestionWrapper}>
+        <div className={styles.sectionTopWrapper}>
+          <div className={styles.sectionWrapper}>
+            <div className={styles.detailsBoxContainer}>
+              <div className={styles.detailsBox}>
+                <label className={styles.sectionLabel}>Question Details</label>
+                <QuestionDetails
+                  question={currentQuestion}
+                  setQuestion={setCurrentQuestion}
+                />
+              </div>
+            </div>
+              <div className={styles.detailsBoxContainer}>
+            <div className={styles.detailsBox}>
+              <label className={styles.sectionLabel}>Add Answers</label>
+              <AnswerList />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className={styles.addQuestionContainer}>
+          <div className={styles.addQuestionWrapper}>
+            <button
+              className={styles.addQuestionBtn}
+              onClick={handleAddQuestion}
+            >
+              Add Question
+            </button>
+            {errors.general && (
+              <div className={styles.errMsg}>{errors.general}</div>
+            )}
+          </div>
+        </div>
       </div>
-      <NewQuestionsList onDelete={handleDeleteQuestion} />
-    </div>
+      </div>
+
+      <div className={styles.questionListWrapper}>
+        <NewQuestionsList onDelete={handleDeleteQuestion} />
+      </div>
+    </>
   );
 };
 

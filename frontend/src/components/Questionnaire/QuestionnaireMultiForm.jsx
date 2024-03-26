@@ -9,6 +9,7 @@ import FormProgress from "./FormProgress";
 import { ArrowRight, ChevronLeft } from "lucide-react";
 import { TailSpin } from "react-loader-spinner";
 import styles from "./QuestionnaireMultiForm.module.css";
+import appStyles from '../App.module.css'
 import axios from "axios";
 const QuestionnaireMultiForm = () => {
   const navigate = useNavigate();
@@ -59,18 +60,18 @@ const QuestionnaireMultiForm = () => {
         questionnaireData
       );
       setTimeout(() => {
-        setIsSubmitting(false); 
+        setIsSubmitting(false);
         setSubmissionMessage("Successfully submitted questionnaire.");
         setFormSubmitted(true);
         resetFormData(); // Reset form data after successful submission
-      }, 500); 
+      }, 500);
     } catch (error) {
       console.error(
         "Failed to submit questionnaire:",
         error.response ? error.response.data : error.message
       );
       setTimeout(() => {
-        setIsSubmitting(false); 
+        setIsSubmitting(false);
         setSubmissionMessage(
           "Failed to submit questionnaire. Please try again."
         );
@@ -96,10 +97,12 @@ const QuestionnaireMultiForm = () => {
         stepComponent = <div>Unknown step</div>;
     }
 
-    return stepComponent
+    return stepComponent;
   }
   return (
-      <>
+    <div className={appStyles.pageChildContent}>
+      <FormProgress currentStep={currentStep} />
+      <div className={appStyles.pageContentWrapper}>
         {isSubmitting ? (
           <TailSpin
             visible={true}
@@ -132,9 +135,12 @@ const QuestionnaireMultiForm = () => {
           </>
         ) : (
           <>
-              <FormProgress currentStep={currentStep} />
-              {renderStep()}
-            <div className={styles.buttonsContainer}>
+            {renderStep()}
+            
+          </>
+        )}
+      </div>
+      <div className={styles.buttonsContainer}>
               {currentStep > 1 && (
                 <button className={styles.prevBtn} onClick={prevStep}>
                   <ChevronLeft size={20} />
@@ -142,7 +148,8 @@ const QuestionnaireMultiForm = () => {
               )}
               {currentStep < 3 ? (
                 <button className={styles.btn} onClick={handleNextClick}>
-                  Next <ArrowRight size={20} />
+                  {/* Continue <ArrowRight size={20} /> */}
+                  Continue
                 </button>
               ) : (
                 <button className={styles.btn} onClick={handleSubmit}>
@@ -150,9 +157,7 @@ const QuestionnaireMultiForm = () => {
                 </button>
               )}
             </div>
-          </>
-        )}
-      </>
+    </div>
   );
 };
 export default QuestionnaireMultiForm;

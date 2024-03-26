@@ -11,16 +11,20 @@
 }
 .pageChildContent{
     display: flex; 
+    flex-direction: column;
     flex: 1 1 0%;
     overflow: auto;
     padding: 3rem 1rem 1rem;
 }
 .pageContentWrapper{
     display: flex;
-    flex: 1 1 0%;
+    /* flex: 1 1 0%; */
     flex-direction: column;
     max-width: 76rem;
     margin: auto;
+}
+.pageContentWrapper > *{
+    margin-bottom: 1rem;
 }
 @media screen and (min-width: 1440px) {
     .pageChildContent{

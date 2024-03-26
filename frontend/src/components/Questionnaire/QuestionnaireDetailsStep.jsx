@@ -11,8 +11,8 @@ const QuestionnaireDetailsStep = () => {
   } = useForm();
 
   return (
-    <div className={styles.detailsStep}>
-
+    <div className={styles.detailsStepWrapper}>
+      <div className={styles.detailsStep}>
         <div className={styles.inputItem}>
           <label>Questionnaire Name</label>
           <TextInput
@@ -35,6 +35,7 @@ const QuestionnaireDetailsStep = () => {
             <div className={styles.errMsg}>{errors.portalName}</div>
           )}
         </div>
+      </div>
     </div>
   );
 };
