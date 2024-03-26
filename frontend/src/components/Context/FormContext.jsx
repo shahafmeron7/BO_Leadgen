@@ -14,6 +14,7 @@ export const FormProvider = ({ children }) => {
     text: "",
     identifier: "",
     type: "",
+    funnel_id:"",
     answers: [],
   });
   const [currentAnswers, setCurrentAnswers] = useState([""]);
@@ -25,7 +26,7 @@ export const FormProvider = ({ children }) => {
       portalName: "",
       questions: [],
     });
-    setCurrentQuestion({ text: "", identifier: "", type: "", answers: [] });
+    setCurrentQuestion({ text: "", identifier: "", type: "",funnel_id:"", answers: [] });
     setCurrentAnswers([""]);
   };
 
@@ -37,6 +38,12 @@ export const FormProvider = ({ children }) => {
   const handlePortalNameChange = (e) => {
     setFormData({ ...formData, portalName: e.target.value });
     setErrors({ ...errors, portalName: "" });
+  };
+  const updateCurrentQuestion = (field, value) => {
+    setCurrentQuestion(prev => ({
+      ...prev,
+      [field]: value,
+    }));
   };
   const addQuestionToFormData = () => {
     // First, validate the new question
@@ -57,7 +64,7 @@ export const FormProvider = ({ children }) => {
       }));
 
       // Reset currentQuestion and currentAnswers for the next input
-      setCurrentQuestion({ text: "", identifier: "", type: "", answers: [] });
+      setCurrentQuestion({ text: "", identifier: "", type: "",funnel_id:"", answers: [] });
       setCurrentAnswers([""]);
     }
   };
@@ -66,10 +73,9 @@ export const FormProvider = ({ children }) => {
     setFormData({ ...formData, questions: updatedQuestions });
   };
   const clearCurrentQuestion = () => {
-    return { text: "", identifier: "", type: "", answers: [] };
+    return { text: "", identifier: "", type: "",funnel_id:"", answers: [] };
   };
   const addAnswerField = () => {
-    console.log("add aswer");
 
     setCurrentAnswers([...currentAnswers, ""]);
     if (errors.answers && errors.answers.general) {
@@ -204,6 +210,7 @@ export const FormProvider = ({ children }) => {
       updateAnswerText,
       setCurrentQuestion,
       setFormData,
+      updateCurrentQuestion,
       handleQuestionnaireNameChange,
       handlePortalNameChange,
       addQuestionToFormData,

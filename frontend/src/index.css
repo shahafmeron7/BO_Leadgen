@@ -52,3 +52,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #bdc2c7;
+  font-size: 0.875rem;
+  opacity: 1; /* Firefox */
+}
+
+input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: red;
+}
+
+input::-ms-input-placeholder { /* Microsoft Edge */
+  color: red;
+}

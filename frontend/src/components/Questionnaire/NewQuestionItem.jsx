@@ -33,6 +33,8 @@ const NewQuestionItem = ({ questionDetails, onDelete, index }) => {
          className={`${styles.questionItemDetails} ${isOpen ? styles.questionItemDetailsOpen : ''}`}
        >
           <p>Identifier: {questionDetails.identifier}</p>
+          <p>Funnel ID: {questionDetails.funnel_id}</p>
+
           <p>Type: {questionDetails.type}</p>
           <p>Answers:</p>
           <ul>
