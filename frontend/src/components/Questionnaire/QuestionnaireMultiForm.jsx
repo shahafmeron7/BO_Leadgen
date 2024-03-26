@@ -59,19 +59,18 @@ const QuestionnaireMultiForm = () => {
         questionnaireData
       );
       setTimeout(() => {
-        setIsSubmitting(false); // Stop submitting
+        setIsSubmitting(false); 
         setSubmissionMessage("Successfully submitted questionnaire.");
         setFormSubmitted(true);
         resetFormData(); // Reset form data after successful submission
-        // Optionally, clear the form here if you have a function to reset formData
-      }, 500); // Adjust the delay as needed
+      }, 500); 
     } catch (error) {
       console.error(
         "Failed to submit questionnaire:",
         error.response ? error.response.data : error.message
       );
       setTimeout(() => {
-        setIsSubmitting(false); // Stop submitting
+        setIsSubmitting(false); 
         setSubmissionMessage(
           "Failed to submit questionnaire. Please try again."
         );
@@ -81,35 +80,26 @@ const QuestionnaireMultiForm = () => {
   };
 
   function renderStep() {
-    let stepTitle = ""; // Initialize step title
     let stepComponent = null; // Initialize step component
 
     switch (currentStep) {
       case 1:
-        stepTitle = "Questionnaire Details";
         stepComponent = <QuestionnaireDetailsStep />;
         break;
       case 2:
-        stepTitle = "Create Questions";
         stepComponent = <CreateQuestionsStep />;
         break;
       case 3:
-        stepTitle = "Review & Submit";
         stepComponent = <ReviewQuestionnaireStep />;
         break;
       default:
         stepComponent = <div>Unknown step</div>;
     }
 
-    return (
-      <>
-        {stepTitle && <h4>{stepTitle}</h4>}
-        {stepComponent}
-      </>
-    );
+    return stepComponent
   }
   return (
-      <div className={styles.formWrapper}>
+      <>
         {isSubmitting ? (
           <TailSpin
             visible={true}
@@ -142,12 +132,8 @@ const QuestionnaireMultiForm = () => {
           </>
         ) : (
           <>
-            <div className={styles.formTopContainer}>
               <FormProgress currentStep={currentStep} />
-              {/* <div className={styles.formContent}> */}
               {renderStep()}
-              {/* </div> */}
-            </div>
             <div className={styles.buttonsContainer}>
               {currentStep > 1 && (
                 <button className={styles.prevBtn} onClick={prevStep}>
@@ -166,56 +152,7 @@ const QuestionnaireMultiForm = () => {
             </div>
           </>
         )}
-      </div>
+      </>
   );
 };
-//   return (
-//     <div className={styles.formContainer}>
-//       {isSubmitting ? (
-//         <TailSpin
-//           visible={true}
-//           height="100"
-//           width="100"
-//           color="#006EFF"
-//           ariaLabel="tail-spin-loading"
-//           radius="1"
-//           wrapperStyle={{}}
-//           wrapperClass=""
-//         /> // Replace this with your loading spinner or indicator
-//       ) : submissionMessage ? (
-//         <div
-//           className={
-//             submissionMessage.startsWith("Successfully")
-//               ? "successMessage"
-//               : "errorMessage"
-//           }
-//         >
-//           {submissionMessage}
-//         </div>
-//       ) : (
-//         <>
-//           <FormProgress currentStep={currentStep} />
-//           {renderStep()}
-//           <div className={styles.buttonsContainer}>
-//             {currentStep > 1 && (
-//               <button className={styles.prevBtn} onClick={prevStep}>
-//                 <ChevronLeft size={20} />
-//               </button>
-//             )}
-//             {currentStep < 3 ? (
-//               <button className={styles.btn} onClick={handleNextClick}>
-//                 Next <ArrowRight size={20} />
-//               </button>
-//             ) : (
-//               <button className={styles.btn} onClick={handleSubmit}>
-//                 Submit
-//               </button>
-//             )}
-//           </div>
-//         </>
-//       )}
-//     </div>
-//   );
-// };
-
 export default QuestionnaireMultiForm;
