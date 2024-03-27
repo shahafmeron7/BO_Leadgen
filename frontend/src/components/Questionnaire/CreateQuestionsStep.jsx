@@ -6,10 +6,9 @@ import QuestionDetails from "./QuestionDetails";
 import AnswerList from "./AnswerList";
 import NewQuestionsList from "./NewQuestionsList";
 import styles from "./QuestionnaireMultiForm.module.css";
+import inputStyle from '../UI/InputWrapper.module.css'
 const CreateQuestionsStep = ({}) => {
   const {
-    // currentQuestion,
-    // setCurrentQuestion,
     addQuestionToFormData,
     errors,
     deleteQuestion,
@@ -59,7 +58,7 @@ const CreateQuestionsStep = ({}) => {
                 Add Question
               </button>
               {errors.general && (
-                <div className={styles.errMsg}>{errors.general}</div>
+                <div className={inputStyle.errMsg}>{errors.general}</div>
               )}
             </div>
           </div>

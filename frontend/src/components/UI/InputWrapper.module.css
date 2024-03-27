@@ -1,0 +1,41 @@
+
+.inputWrapper{
+    display: flex;
+    flex-direction: column;
+}
+.inputWrapper span{
+    font-weight: 500;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+}
+.inputWrapper:not(:last-child) {
+    margin-bottom: 1rem;
+}
+.inputItem {
+    display: flex;
+    align-items: left;
+    flex-direction: column;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+  .inputItem h4 {
+    font-size: 1rem;
+  }
+  .errMsg {
+    color: var(--err-msg-color);
+  }
+.textInput{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    outline: var(--border-input-outline-color) solid 2px;
+    background-color: #fff;
+    transition: outline 150ms ease-in-out 0s;
+    cursor: text;
+    font-size:1rem;
+    border: 1px solid #bdc2c7;
+    height: 3rem;
+    border-radius: 0.5rem;
+    width:27rem;
+    padding-left: 1.25rem;
+}

@@ -14,7 +14,7 @@ export const FormProvider = ({ children }) => {
     text: "",
     identifier: "",
     type: "",
-    funnel_id:"",
+    funnelId:"",
     answers: [],
   });
   const [currentAnswers, setCurrentAnswers] = useState([""]);
@@ -149,6 +149,9 @@ export const FormProvider = ({ children }) => {
 
     if (!currentQuestion.type.trim()) {
       errors.type = "Question type is required.";
+    }
+    if (!currentQuestion.funnelId.trim()) {
+      errors.funnelId = "Funnel ID is required.";
     }
     // Initialize the errors.answers as an object or array to store individual answer errors
     errors.answers = {};

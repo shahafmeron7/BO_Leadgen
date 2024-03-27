@@ -1,8 +1,8 @@
 import React from "react";
-import TextInput from "../UI/TextInput";
 import { useForm } from "../Context/FormContext";
 import { Trash2,Plus } from "lucide-react";
 import styles from "./QuestionnaireMultiForm.module.css";
+import InputWrapper from "../UI/InputWrapper";
 const AnswerList = () => {
   const {
     currentAnswers,
@@ -18,20 +18,26 @@ const AnswerList = () => {
         {currentAnswers.map((answer, index) => (
           <div key={index} className={styles.fieldItem}>
             <div  className={styles.answerItem}>
-              <TextInput
+              <InputWrapper
+               value={answer}
+               onChange={(e) => updateAnswerText(e.target.value, index)}
+               placeholder={`Answer ${index + 1}`}
+               error={errors.answers && errors.answers[index]}
+              />
+              {/* <input
                 value={answer}
                 onChange={(e) => updateAnswerText(e.target.value, index)}
                 placeholder={`Answer ${index + 1}`}
-              />
+              /> */}
               {/* Display error for individual answer if exists */}
 
               <button className={styles.trashBtn} type="button" onClick={() => removeAnswerField(index)}>
                 <Trash2 size={18} color="#e16573" />
               </button>
             </div>
-            {errors.answers && errors.answers[index] && (
+            {/* {errors.answers && errors.answers[index] && (
               <div className={styles.errMsg}>{errors.answers[index]}</div>
-            )}
+            )} */}
           </div>
         ))}
       </div>

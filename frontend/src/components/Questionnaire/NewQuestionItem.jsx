@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import styles from "./QuestionnaireMultiForm.module.css";
 import {ChevronUp,Trash2} from 'lucide-react'
 const NewQuestionItem = ({ questionDetails, onDelete, index }) => {
