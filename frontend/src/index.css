@@ -19,6 +19,11 @@
   --err-msg-color:rgb(246, 43, 84);
   --trash-btn-border-color: #f7dde4;
   --trash-btn-bg-color:#FEF4F5;
+  --trash-hover-border-color:#f4c6d0;
+  --trash-hover-bg-color:#fddde1;
+  --black-bg-color :#282936; 
+  --black-bg-hover-color: #333333;
+ 
  
 }
 *{

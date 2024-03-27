@@ -15,6 +15,8 @@ const QuestionDetails =()=> {
   return (
     <>
       {inputs.map((input, index) => (
+        <div className={styles.inputContainer}>
+
         <InputWrapper
           key={index}
           label={input.label}
@@ -22,7 +24,8 @@ const QuestionDetails =()=> {
           onChange={e => updateCurrentQuestion(input.field, e.target.value)}
           placeholder={input.placeholder}
           error={errors[input.field]}
-        />
+          />
+          </div>
       ))}
     </>
   );

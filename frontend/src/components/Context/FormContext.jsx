@@ -40,10 +40,13 @@ export const FormProvider = ({ children }) => {
     setErrors({ ...errors, portalName: "" });
   };
   const updateCurrentQuestion = (field, value) => {
+    console.log(field,value)
     setCurrentQuestion(prev => ({
       ...prev,
       [field]: value,
     }));
+    setErrors({ ...errors, [field]: "" });
+
   };
   const addQuestionToFormData = () => {
     // First, validate the new question

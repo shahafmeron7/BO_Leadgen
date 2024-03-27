@@ -13,7 +13,7 @@ const QuestionnaireDetailsStep = () => {
   return (
     <div className={styles.detailsStepWrapper}>
       <div className={styles.detailsStep}>
-        {/* <div className={styles.inputItem}> */}
+        <div className={styles.inputContainer}>
         <InputWrapper
           label="Questionnaire Name"
           value={formData.questionnaireName}
@@ -21,8 +21,8 @@ const QuestionnaireDetailsStep = () => {
           placeholder="e.g Leadgen POS"
           error={errors.questionnaireName}
         />
-        {/* </div> */}
-        <div className={styles.inputItem}>
+        </div>
+        <div className={styles.inputContainer}>
         <InputWrapper
           label="Questionnaire Portal"
           value={formData.portalName}

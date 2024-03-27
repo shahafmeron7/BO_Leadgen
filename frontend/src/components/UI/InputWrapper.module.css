@@ -1,14 +1,17 @@
 
+
 .inputWrapper{
     display: flex;
     flex-direction: column;
+    /* max-width: 27rem; */
+    flex:1;
 }
 .inputWrapper span{
     font-weight: 500;
     font-size: 0.875rem;
     margin-bottom: 0.5rem;
 }
-.inputWrapper:not(:last-child) {
+.inputWrapper:not(:last-child){
     margin-bottom: 1rem;
 }
 .inputItem {
@@ -23,6 +26,9 @@
   }
   .errMsg {
     color: var(--err-msg-color);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+   
   }
 .textInput{
     display: flex;
@@ -36,6 +42,8 @@
     border: 1px solid #bdc2c7;
     height: 3rem;
     border-radius: 0.5rem;
-    width:27rem;
+    /* max-width:27rem; */
+    /* width: 23rem; */
+    width: 100%;
     padding-left: 1.25rem;
 }
