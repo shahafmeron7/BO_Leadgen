@@ -2,14 +2,14 @@ import React from "react";
 import { useForm } from "../Context/FormContext";
 import NewQuestionItem from "./NewQuestionItem";
 import styles from './QuestionnaireMultiForm.module.css'
-const NewQuestionsList = () => {
+const NewQuestionsList = ({sectionLabel}) => {
   const { formData,deleteQuestion } = useForm();
   const handleDeleteQuestion = (index)=>{
     deleteQuestion(index);
   }
   return (
     <div className={styles.newQuestionsSection}>
-      <span className={styles.formSectionLabel}>Questions ({formData.questions.length})</span>
+      {sectionLabel && (<span className={styles.formSectionLabel}>Questions ({formData.questions.length})</span>)}
       <div className={styles.questionsContainer}>
       {formData.questions.map((question, index) => (
         <NewQuestionItem

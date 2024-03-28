@@ -1,0 +1,26 @@
+
+.infoFieldWrapper{
+    display: flex;
+    gap: 0.25rem;
+  }
+  
+  .detailsFieldContainer{
+    display: flex;
+    flex-direction: column;
+    gap:0.25rem;
+    flex:1;
+  }
+  .infoFieldWrapper:last-child .detailsFieldContainer{
+    gap:0.5rem;
+  }
+  .infoLabelText{
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--black-bg-color);
+  }
+  .infoLabelDetails{
+  color: rgb(103, 107, 115);
+  font-weight: 400;
+    font-size: 0.875rem;
+  
+  }

@@ -1,0 +1,22 @@
+.detailsBoxContainer {
+    /* margin-bottom:1rem; */
+    /* border: 1px solid rgb(234, 235, 236); */
+    background-color: #fff;
+    padding: 0px;
+    flex: 1 1 0%;
+    overflow: hidden;
+    position: static;
+    border-radius: 1rem;
+  }
+  .detailsBox {
+    padding: 1.25rem 1.75rem;
+    /* min-height: 15rem; */
+  }
+  .formSectionLabelContainer {
+    display: flex;
+  }
+  .formSectionLabel {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }

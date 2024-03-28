@@ -8,7 +8,7 @@ import InputWrapper from "../UI/InputWrapper";
 const AnswerList = () => {
   const {
     currentAnswers,
-    updateAnswerText,
+    updateAnswerField,
     removeAnswerField,
     addAnswerField,
     errors,
@@ -22,18 +22,17 @@ const AnswerList = () => {
             <div className={styles.answerItem}>
               <InputWrapper
                 label={'Answer Text'}
-                value={answer}
-                onChange={(e) => updateAnswerText(e.target.value, index)}
+                value={answer.text}
+                onChange={(e) => updateAnswerField( index,'text',e.target.value)}
                 placeholder={`Answer ${index + 1}`}
-                error={errors.answers && errors.answers[index]}
-              />
+                error={(errors.answers && errors.answers[index] && errors.answers[index].text) || ''}
+                />
               <InputWrapper
                 label={'Funnel ID'}
                 value={answer.funnelId}
-                onChange={(e) => updateAnswerText(e.target.value, index)}
-                placeholder={`Answer ${index + 1}`}
-                error={errors.answers && errors.answers[index]}
-              />
+                onChange={(e) => updateAnswerField(index,'funnelId',e.target.value)}
+                error={(errors.answers && errors.answers[index] && errors.answers[index].funnelId) || ''}
+                />
               <div className={styles.trashBtnWrapper}>
                 <button
                   className={styles.trashBtn}

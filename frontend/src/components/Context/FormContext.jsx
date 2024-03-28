@@ -14,10 +14,12 @@ export const FormProvider = ({ children }) => {
     text: "",
     identifier: "",
     type: "",
-    funnelId:"",
+    funnelId: "",
     answers: [],
   });
-  const [currentAnswers, setCurrentAnswers] = useState([""]);
+  const [currentAnswers, setCurrentAnswers] = useState([
+    { text: "", funnelId: "" },
+  ]);
   const [errors, setErrors] = useState({});
 
   const resetFormData = () => {
@@ -26,7 +28,13 @@ export const FormProvider = ({ children }) => {
       portalName: "",
       questions: [],
     });
-    setCurrentQuestion({ text: "", identifier: "", type: "",funnelId:"", answers: [] });
+    setCurrentQuestion({
+      text: "",
+      identifier: "",
+      type: "",
+      funnelId: "",
+      answers: [],
+    });
     setCurrentAnswers([""]);
   };
 
@@ -40,13 +48,12 @@ export const FormProvider = ({ children }) => {
     setErrors({ ...errors, portalName: "" });
   };
   const updateCurrentQuestion = (field, value) => {
-    console.log(field,value)
-    setCurrentQuestion(prev => ({
+    console.log(field, value);
+    setCurrentQuestion((prev) => ({
       ...prev,
       [field]: value,
     }));
     setErrors({ ...errors, [field]: "" });
-
   };
   const addQuestionToFormData = () => {
     // First, validate the new question
@@ -67,21 +74,30 @@ export const FormProvider = ({ children }) => {
       }));
 
       // Reset currentQuestion and currentAnswers for the next input
-      setCurrentQuestion({ text: "", identifier: "", type: "",funnelId:"", answers: [] });
-      setCurrentAnswers([""]);
+      setCurrentQuestion({
+        text: "",
+        identifier: "",
+        type: "",
+        funnelId: "",
+        answers: [],
+      });
+      setCurrentAnswers([
+        { text: "", funnelId: "" },
+      ]);
     }
   };
   const deleteQuestion = (index) => {
-    console.log('delete',index);
-    const updatedQuestions = formData.questions.filter((_, questionIndex) => questionIndex !== index);
+    console.log("delete", index);
+    const updatedQuestions = formData.questions.filter(
+      (_, questionIndex) => questionIndex !== index
+    );
     setFormData({ ...formData, questions: updatedQuestions });
   };
   const clearCurrentQuestion = () => {
-    return { text: "", identifier: "", type: "",funnelId:"", answers: [] };
+    return { text: "", identifier: "", type: "", funnelId: "", answers: [] };
   };
   const addAnswerField = () => {
-
-    setCurrentAnswers([...currentAnswers, ""]);
+    setCurrentAnswers([...currentAnswers, { text: "", funnelId: "" }]);
     if (errors.answers && errors.answers.general) {
       const updatedErrors = { ...errors, answers: { ...errors.answers } };
       delete updatedErrors.answers.general; // Remove the general error
@@ -111,11 +127,12 @@ export const FormProvider = ({ children }) => {
     }
   };
   // Updates the text for a specific answer of the current question
-  const updateAnswerText = (text, index) => {
+  const updateAnswerField = (index, field, value) => {
     const updatedAnswers = currentAnswers.map((answer, i) =>
-      i === index ? text : answer
+      i === index ? { ...answer, [field]: value } : answer
     );
     setCurrentAnswers(updatedAnswers);
+
     // Also update the errors state to remove the error for this answer index
     if (errors.answers && errors.answers[index]) {
       const updatedErrors = { ...errors }; // Make a shallow copy of the errors object
@@ -158,21 +175,26 @@ export const FormProvider = ({ children }) => {
       errors.funnelId = "Funnel ID is required.";
     }
     // Initialize the errors.answers as an object or array to store individual answer errors
-    errors.answers = {};
-
-    currentAnswers.forEach((answer, index) => {
-      if (!answer.trim()) {
-        // Record an error for each answer that fails validation
-        errors.answers[index] = "Answer is required.";
+    errors.answers = currentAnswers.map((answer, index) => {
+      let answerErrors = {};
+      if (!answer.text.trim()) {
+        answerErrors.text = "Answer text is required.";
       }
-    });
-    console.log(currentQuestion, "currentquestion");
-    // Check if there are any answers at all
+      if (!answer.funnelId.trim()) {
+        answerErrors.funnelId = "Funnel ID is required.";
+      }
+      return answerErrors;
+    }).reduce((acc, curr, idx) => {
+      if (Object.keys(curr).length) acc[idx] = curr; // Only add if there are errors
+      return acc;
+    }, {});
+  
     if (currentAnswers.length === 0) {
       errors.answers.general = "At least one valid answer is required.";
     } else if (Object.keys(errors.answers).length === 0) {
       delete errors.answers; // If there are no answer errors, remove the answers key
     }
+  
     return errors;
   };
   // Validation for Step 2
@@ -184,7 +206,6 @@ export const FormProvider = ({ children }) => {
       errors.general = "At least one question must be added before proceeding.";
     }
     return errors;
-
   };
 
   const validateCurrentStep = (step) => {
@@ -214,7 +235,7 @@ export const FormProvider = ({ children }) => {
       setCurrentAnswers,
       addAnswerField,
       removeAnswerField,
-      updateAnswerText,
+      updateAnswerField,
       setCurrentQuestion,
       setFormData,
       updateCurrentQuestion,
