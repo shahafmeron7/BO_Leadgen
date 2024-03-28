@@ -15,10 +15,10 @@ const QuestionDetails =()=> {
   return (
     <>
       {inputs.map((input, index) => (
-        <div className={styles.inputContainer}>
+        <div           key={index}
+        className={styles.inputContainer}>
 
         <InputWrapper
-          key={index}
           label={input.label}
           value={currentQuestion[input.field]}
           onChange={e => updateCurrentQuestion(input.field, e.target.value)}

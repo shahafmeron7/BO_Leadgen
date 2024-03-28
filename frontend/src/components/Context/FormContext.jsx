@@ -26,7 +26,7 @@ export const FormProvider = ({ children }) => {
       portalName: "",
       questions: [],
     });
-    setCurrentQuestion({ text: "", identifier: "", type: "",funnel_id:"", answers: [] });
+    setCurrentQuestion({ text: "", identifier: "", type: "",funnelId:"", answers: [] });
     setCurrentAnswers([""]);
   };
 
@@ -67,7 +67,7 @@ export const FormProvider = ({ children }) => {
       }));
 
       // Reset currentQuestion and currentAnswers for the next input
-      setCurrentQuestion({ text: "", identifier: "", type: "",funnel_id:"", answers: [] });
+      setCurrentQuestion({ text: "", identifier: "", type: "",funnelId:"", answers: [] });
       setCurrentAnswers([""]);
     }
   };
@@ -76,7 +76,7 @@ export const FormProvider = ({ children }) => {
     setFormData({ ...formData, questions: updatedQuestions });
   };
   const clearCurrentQuestion = () => {
-    return { text: "", identifier: "", type: "",funnel_id:"", answers: [] };
+    return { text: "", identifier: "", type: "",funnelId:"", answers: [] };
   };
   const addAnswerField = () => {
 

@@ -46,4 +46,8 @@
     /* width: 23rem; */
     width: 100%;
     padding-left: 1.25rem;
+    transition: all 0.5s ease ;
+}
+.textInput:focus{
+  border-color:var(--black-bg-color)
 }

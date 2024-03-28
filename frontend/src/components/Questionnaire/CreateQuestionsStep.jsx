@@ -6,13 +6,9 @@ import QuestionDetails from "./QuestionDetails";
 import AnswerList from "./AnswerList";
 import NewQuestionsList from "./NewQuestionsList";
 import styles from "./QuestionnaireMultiForm.module.css";
-import inputStyle from '../UI/InputWrapper.module.css'
+import inputStyle from "../UI/InputWrapper.module.css";
 const CreateQuestionsStep = ({}) => {
-  const {
-    addQuestionToFormData,
-    errors,
-    deleteQuestion,
-  } = useForm();
+  const { addQuestionToFormData, errors, deleteQuestion } = useForm();
 
   const handleAddQuestion = () => {
     addQuestionToFormData();
@@ -23,8 +19,8 @@ const CreateQuestionsStep = ({}) => {
 
   return (
     <>
-      <div className={styles.createQuestionContainer}>
-        <div className={styles.createQuestionWrapper}>
+      <div className={styles.detailsContainer}>
+        <div className={styles.detailsWrapper}>
           <div className={styles.sectionTopWrapper}>
             <div className={styles.sectionWrapper}>
               <div className={styles.detailsBoxContainer}>
@@ -34,15 +30,13 @@ const CreateQuestionsStep = ({}) => {
                       Question Details
                     </span>
                   </div>
-                  <QuestionDetails/>
+                  <QuestionDetails />
                 </div>
               </div>
               <div className={styles.detailsBoxContainer}>
                 <div className={styles.detailsBox}>
                   <div className={styles.formSectionLabelContainer}>
-                    <span className={styles.formSectionLabel}>
-                      Answers
-                    </span>
+                    <span className={styles.formSectionLabel}>Answers</span>
                   </div>
                   <AnswerList />
                 </div>
@@ -64,9 +58,10 @@ const CreateQuestionsStep = ({}) => {
           </div>
         </div>
       </div>
-
-      <div className={styles.questionListWrapper}>
-        <NewQuestionsList onDelete={handleDeleteQuestion} />
+      <div className={styles.detailsContainer}>
+        <div className={styles.detailsWrapper}>
+          <NewQuestionsList onDelete={handleDeleteQuestion} />
+        </div>
       </div>
     </>
   );

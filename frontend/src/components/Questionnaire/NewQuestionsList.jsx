@@ -6,7 +6,7 @@ const NewQuestionsList = ({onDelete}) => {
   const { formData } = useForm();
   return (
     <div className={styles.newQuestionsSection}>
-      <div>Questions ({formData.questions.length})</div>
+      <span className={styles.formSectionLabel}>Questions ({formData.questions.length})</span>
       <div className={styles.questionsContainer}>
       {formData.questions.map((question, index) => (
         <NewQuestionItem
