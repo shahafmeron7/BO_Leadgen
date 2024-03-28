@@ -2,7 +2,9 @@ import React from "react";
 import { useForm } from "../Context/FormContext";
 import { Trash2, Plus } from "lucide-react";
 import styles from "./QuestionnaireMultiForm.module.css";
+import errStyle from '../UI/InputWrapper.module.css'
 import InputWrapper from "../UI/InputWrapper";
+
 const AnswerList = () => {
   const {
     currentAnswers,
@@ -19,7 +21,15 @@ const AnswerList = () => {
           <div key={index} className={styles.answerFieldWrapper}>
             <div className={styles.answerItem}>
               <InputWrapper
+                label={'Answer Text'}
                 value={answer}
+                onChange={(e) => updateAnswerText(e.target.value, index)}
+                placeholder={`Answer ${index + 1}`}
+                error={errors.answers && errors.answers[index]}
+              />
+              <InputWrapper
+                label={'Funnel ID'}
+                value={answer.funnelId}
                 onChange={(e) => updateAnswerText(e.target.value, index)}
                 placeholder={`Answer ${index + 1}`}
                 error={errors.answers && errors.answers[index]}
@@ -38,7 +48,7 @@ const AnswerList = () => {
         ))}
       </div>
       {errors.answers?.general && (
-        <div className={styles.errMsg}>{errors.answers.general}</div>
+        <div className={errStyle.errMsg} style={{marginBottom:'1rem'}}>{errors.answers.general}</div>
       )}
       <div className={styles.btnContainer}>
         <button

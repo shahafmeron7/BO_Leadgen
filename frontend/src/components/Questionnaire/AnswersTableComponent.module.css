@@ -1,0 +1,73 @@
+
+.answerDetailsItemContainer{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    
+  }
+  .answerDetailsItemContainer:hover{
+    background-color: #FBFBFB ;
+  }
+  .answerDetailsItemContainer:not(:last-child){
+    
+    border-bottom:1px solid var(--gray4-color);
+  }
+  .answersTable{
+  flex:1;
+  font-size: 0.75rem;
+  }
+  .tableHeadersWrapper{
+  /* border:1px solid; */
+  color:var(--black-bg-color);
+  }
+  .tableHeaders{
+    display: flex;
+  border-radius: 0.5rem 0.5rem 0 0;
+  }
+  .tableHeadersWrapper .tableCell{
+    font-weight: 500;
+    color:var(--black-bg-color);
+  
+    /* font-size: 0.75rem; */
+  }
+  .tableBody .tableCell{
+    font-weight: 400;
+    
+  }
+  .tableCell{
+    /* width: 5rem; */
+    /* flex:1; */
+    padding: 0.5rem;
+  }
+  .tableCell{
+    color:rgb(103, 107, 115);
+  }
+  .tableBody .tableCell:first-child,
+  .tableHeadersWrapper .tableCell:first-child{
+    width:2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .tableBody .tableCell:not(:first-child),
+  .tableHeadersWrapper .tableCell:not(:first-child){
+    flex:1;
+  }
+  .tableHeaders{
+    border:1px solid var(--black-bg-color)
+  }
+  
+  .tableHeaders .tableCell:not(:first-child){
+    border-left:1px solid var(--black-bg-color)
+  }
+  
+  .tableBody{
+    border-left: 1px  solid var(--gray4-color);
+    border-bottom: 1px  solid var(--gray4-color);
+    border-right: 1px  solid var(--gray4-color);
+    border-radius: 0px 0px 8px 8px;
+  }
+  .tableBody .answerDetailsItemContainer:last-child{
+    border-radius: 0px 0px 8px 8px;
+  
+  }

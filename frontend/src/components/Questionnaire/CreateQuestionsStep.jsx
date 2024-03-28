@@ -8,14 +8,12 @@ import NewQuestionsList from "./NewQuestionsList";
 import styles from "./QuestionnaireMultiForm.module.css";
 import inputStyle from "../UI/InputWrapper.module.css";
 const CreateQuestionsStep = ({}) => {
-  const { addQuestionToFormData, errors, deleteQuestion } = useForm();
+  const { addQuestionToFormData, errors } = useForm();
 
   const handleAddQuestion = () => {
     addQuestionToFormData();
   };
-  const handleDeleteQuestion = (index) => {
-    deleteQuestion(index);
-  };
+ 
 
   return (
     <>
@@ -60,7 +58,7 @@ const CreateQuestionsStep = ({}) => {
       </div>
       <div className={styles.detailsContainer}>
         <div className={styles.detailsWrapper}>
-          <NewQuestionsList onDelete={handleDeleteQuestion} />
+          <NewQuestionsList />
         </div>
       </div>
     </>

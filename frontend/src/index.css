@@ -16,7 +16,7 @@
   --blue-light-color:rgba(0, 111, 255, 0.1);
   --border-btn-color:rgba(153, 165, 197, 0.5);
   --border-input-color:rgba(153, 165, 197, 0.5);
-  --border-input-outline-color:rgba(0, 110, 255, 0);
+  /* --border-input-outline-color:rgb(0, 3, 7); */
   --err-msg-color:rgb(246, 43, 84);
   --trash-btn-border-color: #f7dde4;
   --trash-btn-bg-color:#FEF4F5;

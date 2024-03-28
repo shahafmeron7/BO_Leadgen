@@ -72,6 +72,7 @@ export const FormProvider = ({ children }) => {
     }
   };
   const deleteQuestion = (index) => {
+    console.log('delete',index);
     const updatedQuestions = formData.questions.filter((_, questionIndex) => questionIndex !== index);
     setFormData({ ...formData, questions: updatedQuestions });
   };

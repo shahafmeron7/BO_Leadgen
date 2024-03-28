@@ -2,8 +2,11 @@ import React from "react";
 import { useForm } from "../Context/FormContext";
 import NewQuestionItem from "./NewQuestionItem";
 import styles from './QuestionnaireMultiForm.module.css'
-const NewQuestionsList = ({onDelete}) => {
-  const { formData } = useForm();
+const NewQuestionsList = () => {
+  const { formData,deleteQuestion } = useForm();
+  const handleDeleteQuestion = (index)=>{
+    deleteQuestion(index);
+  }
   return (
     <div className={styles.newQuestionsSection}>
       <span className={styles.formSectionLabel}>Questions ({formData.questions.length})</span>
@@ -12,7 +15,7 @@ const NewQuestionsList = ({onDelete}) => {
         <NewQuestionItem
           key={question.identifier} // Ensure keys are unique; consider a more unique key if possible
           questionDetails={question}
-          onDelete={onDelete}
+          onDelete={handleDeleteQuestion}
           index={index}
         />
       ))}
