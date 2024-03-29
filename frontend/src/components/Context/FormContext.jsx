@@ -14,11 +14,11 @@ export const FormProvider = ({ children }) => {
     text: "",
     identifier: "",
     type: "",
-    funnelId: "",
+    funnelId: 0,
     answers: [],
   });
   const [currentAnswers, setCurrentAnswers] = useState([
-    { text: "", funnelId: "" },
+    { text: "", funnelId: 0 },
   ]);
   const [errors, setErrors] = useState({});
 
@@ -32,28 +32,34 @@ export const FormProvider = ({ children }) => {
       text: "",
       identifier: "",
       type: "",
-      funnelId: "",
+      funnelId: 0,
       answers: [],
     });
     setCurrentAnswers([""]);
   };
 
-  const handleQuestionnaireNameChange = (e) => {
-    setFormData({ ...formData, questionnaireName: e.target.value });
-    setErrors({ ...errors, questionnaireName: "" });
+  const handleQuestionnaireNameChange = (value) => {
+  
+    setFormData({ ...formData, questionnaireName: value });
+    setErrors((prevErrors) => ({ ...prevErrors, questionnaireName: "" }));
   };
 
-  const handlePortalNameChange = (e) => {
-    setFormData({ ...formData, portalName: e.target.value });
-    setErrors({ ...errors, portalName: "" });
+  const handlePortalNameChange = (value) => {
+    setFormData({ ...formData, portalName: value });
+    setErrors((prevErrors) => ({ ...prevErrors, portalName: "" }));
   };
   const updateCurrentQuestion = (field, value) => {
     console.log(field, value);
     setCurrentQuestion((prev) => ({
       ...prev,
-      [field]: value,
+      // Check if the field is funnelId to parse it as integer, otherwise use value directly
+      [field]: field === 'funnelId' ? parseInt(value, 10) : value,
     }));
-    setErrors({ ...errors, [field]: "" });
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [field]: "", // Clear specific field error
+      answers: prevErrors.answers ? { ...prevErrors.answers } : {}, // Preserve any answer errors
+    }));
   };
   const addQuestionToFormData = () => {
     // First, validate the new question
@@ -78,11 +84,11 @@ export const FormProvider = ({ children }) => {
         text: "",
         identifier: "",
         type: "",
-        funnelId: "",
+        funnelId: 0,
         answers: [],
       });
       setCurrentAnswers([
-        { text: "", funnelId: "" },
+        { text: "", funnelId: 0 },
       ]);
     }
   };
@@ -94,10 +100,10 @@ export const FormProvider = ({ children }) => {
     setFormData({ ...formData, questions: updatedQuestions });
   };
   const clearCurrentQuestion = () => {
-    return { text: "", identifier: "", type: "", funnelId: "", answers: [] };
+    return { text: "", identifier: "", type: "", funnelId: 0, answers: [] };
   };
   const addAnswerField = () => {
-    setCurrentAnswers([...currentAnswers, { text: "", funnelId: "" }]);
+    setCurrentAnswers([...currentAnswers, { text: "", funnelId: 0 }]);
     if (errors.answers && errors.answers.general) {
       const updatedErrors = { ...errors, answers: { ...errors.answers } };
       delete updatedErrors.answers.general; // Remove the general error
@@ -171,7 +177,7 @@ export const FormProvider = ({ children }) => {
     if (!currentQuestion.type.trim()) {
       errors.type = "Question type is required.";
     }
-    if (!currentQuestion.funnelId.trim()) {
+    if (currentQuestion.funnelId < 1) {
       errors.funnelId = "Funnel ID is required.";
     }
     // Initialize the errors.answers as an object or array to store individual answer errors
@@ -180,7 +186,7 @@ export const FormProvider = ({ children }) => {
       if (!answer.text.trim()) {
         answerErrors.text = "Answer text is required.";
       }
-      if (!answer.funnelId.trim()) {
+      if (answer.funnelId < 1) {
         answerErrors.funnelId = "Funnel ID is required.";
       }
       return answerErrors;

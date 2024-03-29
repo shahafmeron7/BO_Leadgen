@@ -4,7 +4,7 @@
     background-color: #fff;
     padding: 0px;
     flex: 1 1 0%;
-    overflow: hidden;
+    /* overflow: hidden; */
     position: static;
     border-radius: 1rem;
   }

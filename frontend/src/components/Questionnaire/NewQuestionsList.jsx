@@ -8,6 +8,7 @@ const NewQuestionsList = ({sectionLabel}) => {
     deleteQuestion(index);
   }
   return (
+    
     <div className={styles.newQuestionsSection}>
       {sectionLabel && (<span className={styles.formSectionLabel}>Questions ({formData.questions.length})</span>)}
       <div className={styles.questionsContainer}>

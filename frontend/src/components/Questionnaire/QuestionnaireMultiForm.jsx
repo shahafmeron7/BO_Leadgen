@@ -1,20 +1,23 @@
 import React, { useState } from "react";
 import { useForm } from "../Context/FormContext";
-import { useNavigate, NavLink } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
+import SubmissionMessage from "../UI/SubmissionMessage";
+import NavigationButtons from "../UI/NavigationButtons";
 import QuestionnaireDetailsStep from "./QuestionnaireDetailsStep";
 import CreateQuestionsStep from "./CreateQuestionsStep";
 import ReviewQuestionnaireStep from "./ReviewQuestionnaireStep";
 import FormProgress from "./FormProgress";
-import { ArrowRight, ChevronLeft } from "lucide-react";
 import { TailSpin } from "react-loader-spinner";
 import styles from "./QuestionnaireMultiForm.module.css";
 import appStyles from '../App.module.css'
 import axios from "axios";
+import DetailsContainer from "../Layouts/DetailsContainer";
+import LayoutComponent from "../Layouts/LayoutComponent";
 const QuestionnaireMultiForm = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(null); // null, true, or false
 
   const { formData, validateCurrentStep, resetFormData } = useForm(); // Using useForm to access formData and setFormData
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -48,37 +51,34 @@ const QuestionnaireMultiForm = () => {
       questions: questions.map((question) => ({
         text: question.text,
         type: question.type,
-        answers: question.answers,
+        answers: question.answers.map(answer => ({
+          text: answer.text, 
+          funnelId: answer.funnelId
+        })),
         identifier_id: question.identifier,
+        funnelId: question.funnelId 
       })),
     };
 
     console.log("Form submitted with data:", questionnaireData);
+
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_BASE_URL}/questionnaires`,
-        questionnaireData
-      );
-      setTimeout(() => {
-        setIsSubmitting(false);
-        setSubmissionMessage("Successfully submitted questionnaire.");
-        setFormSubmitted(true);
-        resetFormData(); // Reset form data after successful submission
-      }, 500);
+      await axios.post(`${process.env.REACT_APP_API_BASE_URL}/questionnaires`, questionnaireData);
+      setIsSuccess(true);
+      setSubmissionMessage("Successfully submitted questionnaire.");
     } catch (error) {
-      console.error(
-        "Failed to submit questionnaire:",
-        error.response ? error.response.data : error.message
-      );
+      console.error("Failed to submit questionnaire:", error);
+      setIsSuccess(false);
+      setSubmissionMessage("Failed to submit questionnaire. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+      setFormSubmitted(true); // Ensure this is set immediately before any async operations like setTimeout
       setTimeout(() => {
-        setIsSubmitting(false);
-        setSubmissionMessage(
-          "Failed to submit questionnaire. Please try again."
-        );
-      }, 500); // Adjust the delay as needed
-      // Handle error scenario, such as showing an error message to the user
+        resetFormData();
+      }, 1000);
     }
   };
+
 
   function renderStep() {
     let stepComponent = null; // Initialize step component
@@ -99,6 +99,12 @@ const QuestionnaireMultiForm = () => {
 
     return stepComponent;
   }
+  const onNewQuestionnaire = () => {
+    setFormSubmitted(false);
+    setCurrentStep(1);
+    navigate("/create-new");
+  };
+
   return (
     <div className={appStyles.pageChildContent}>
       <FormProgress currentStep={currentStep} />
@@ -115,49 +121,29 @@ const QuestionnaireMultiForm = () => {
             wrapperClass=""
           />
         ) : formSubmitted ? (
-          <>
-            <h4>{submissionMessage}</h4>
-            <div className={styles.buttonsContainer}>
-              <NavLink to="/questionnaires" className="button">
-                Review Questionnaire
-              </NavLink>
-              <button
-                onClick={() => {
-                  setFormSubmitted(false); // Reset the form submission state
-                  setCurrentStep(1); // Reset to the first step
-                  // Reset the form state to initial values here if needed
-                  navigate("/create-new"); // Navigate to the form start page for a new questionnaire
-                }}
-              >
-                Create New Questionnaire
-              </button>
-            </div>
-          </>
+          <DetailsContainer>
+            <LayoutComponent>
+          <SubmissionMessage
+              isSuccess={isSuccess}
+              message={submissionMessage}
+              onNewQuestionnaire={onNewQuestionnaire}
+              />
+              </LayoutComponent>
+            </DetailsContainer>
         ) : (
           <>
             {renderStep()}
-            
+            <NavigationButtons
+              currentStep={currentStep}
+              prevStep={prevStep}
+              handleNextClick={handleNextClick}
+              handleSubmit={handleSubmit}
+            />
           </>
         )}
       </div>
-      <div className={styles.buttonsContainer}>
-              {currentStep > 1 && (
-                <button className={styles.prevBtn} onClick={prevStep}>
-                  <ChevronLeft size={20} />
-                </button>
-              )}
-              {currentStep < 3 ? (
-                <button className={styles.btn} onClick={handleNextClick}>
-                  {/* Continue <ArrowRight size={20} /> */}
-                  Continue
-                </button>
-              ) : (
-                <button className={styles.btn} onClick={handleSubmit}>
-                  Submit
-                </button>
-              )}
-            </div>
     </div>
   );
+
 };
 export default QuestionnaireMultiForm;

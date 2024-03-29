@@ -19,7 +19,7 @@
     color: var(--black-bg-color);
   }
   .infoLabelDetails{
-  color: rgb(103, 107, 115);
+  color: var( --gray2-color);
   font-weight: 400;
     font-size: 0.875rem;
   

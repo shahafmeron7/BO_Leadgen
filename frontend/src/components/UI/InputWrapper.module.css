@@ -14,6 +14,15 @@
 .inputWrapper:not(:last-child){
     margin-bottom: 1rem;
 }
+.labelWithIcon{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.labelWithIcon svg{
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
 .inputItem {
     display: flex;
     align-items: left;

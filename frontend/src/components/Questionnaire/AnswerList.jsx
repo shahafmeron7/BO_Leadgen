@@ -1,10 +1,9 @@
 import React from "react";
 import { useForm } from "../Context/FormContext";
-import { Trash2, Plus } from "lucide-react";
+import { Trash2, Plus,CircleHelp} from "lucide-react";
 import styles from "./QuestionnaireMultiForm.module.css";
 import errStyle from '../UI/InputWrapper.module.css'
 import InputWrapper from "../UI/InputWrapper";
-
 const AnswerList = () => {
   const {
     currentAnswers,
@@ -23,16 +22,22 @@ const AnswerList = () => {
               <InputWrapper
                 label={'Answer Text'}
                 value={answer.text}
-                onChange={(e) => updateAnswerField( index,'text',e.target.value)}
+                onChange={(value) => updateAnswerField(index, 'text', value)} // Directly passing value
                 placeholder={`Answer ${index + 1}`}
                 error={(errors.answers && errors.answers[index] && errors.answers[index].text) || ''}
                 />
+
               <InputWrapper
+                icon={CircleHelp}
                 label={'Funnel ID'}
-                value={answer.funnelId}
-                onChange={(e) => updateAnswerField(index,'funnelId',e.target.value)}
+                value={answer.funnelId.toString()} // Ensuring the value is a string
+                onChange={(value) => updateAnswerField(index, 'funnelId', parseInt(value, 10) || 0)} // Parsing to int, defaulting to 0 if empty
                 error={(errors.answers && errors.answers[index] && errors.answers[index].funnelId) || ''}
+                placeholder="e.g 301"
+                isNum={true}
+                tooltipType="answer"
                 />
+
               <div className={styles.trashBtnWrapper}>
                 <button
                   className={styles.trashBtn}
